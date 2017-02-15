@@ -1,0 +1,26 @@
+---
+- name: set maven environment list
+  lineinfile:
+    dest: /etc/profile
+    line: "{{ item.name }}={{ item.value }}"
+    regexp: '^{{ item.name }}\s*=\s*.+$'
+    state: present
+  with_items: "{{ maven_environment_list }}"
+
+- name: add MAVEN_HOME/bin to PATH environment
+  lineinfile:
+    dest: /etc/profile
+    line: "export PATH={{ maven_install_dir }}/bin:$PATH"
+    state: present
+
+- name: create maven user
+  user:
+    name: maven
+    state: present
+
+- name: configure global maven setting
+  template:
+    src: settings.xml.j2
+    dest: "{{ maven_install_dir }}/conf/settings.xml"
+    owner: root
+    mode: 0644

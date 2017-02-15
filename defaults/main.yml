@@ -1,0 +1,11 @@
+---
+# defaults file for roles/maven
+maven_version: 3.3.9
+maven_name: "apache-maven-{{ maven_version }}"
+maven_download_name: "{{ maven_name }}-bin.tar.gz"
+maven_download_dir: /tmp
+maven_install_dir: /usr/local/maven
+maven_download_path: "http://ftp.mirror.tw/pub/apache/maven/maven-3/{{ maven_version }}/binaries/{{ maven_download_name }}"
+maven_environment_list:
+  - {name: MAVEN_OPTS, value: "\"-Xms256m -Xmx512m\"" }
+nexus_repo_addr: http://192.168.34.10:8081/repository/maven-public/

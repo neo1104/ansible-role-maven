@@ -1,0 +1,17 @@
+---
+- name: download maven
+  get_url:
+    url: "{{ maven_download_path }}"
+    dest: "{{ maven_download_dir }}/{{ maven_download_name }}"
+
+- name: unarchive maven targz
+  shell: "tar -zxvf {{ maven_download_name }}"
+  args:
+    chdir: "{{ maven_download_dir }}"
+    creates: "{{ maven_name }}"
+
+- name: move maven to install directory
+  shell: "mv {{ maven_download_dir }}/{{ maven_name }} {{ maven_install_dir }}"
+  args:
+    chdir: "{{ maven_download_dir }}"
+    creates: "{{ maven_install_dir }}"
