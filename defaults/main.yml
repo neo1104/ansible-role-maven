@@ -9,3 +9,5 @@ maven_download_path: "http://ftp.mirror.tw/pub/apache/maven/maven-3/{{ maven_ver
 maven_environment_list:
   - {name: MAVEN_OPTS, value: "\"-Xms256m -Xmx512m\"" }
 nexus_repo_addr: http://192.168.34.10:8081/repository/maven-public/
+nexus_user: admin
+nexus_passwd: admin123
